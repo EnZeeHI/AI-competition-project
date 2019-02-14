@@ -858,7 +858,7 @@ MonoBehaviour:
   LeftTurretRotation: 0
   RightTurretRotation: 0
   RotationSpeed: 100
-  MovementSpeed: 100
+  MovementSpeed: 20
   CannonSpeed: 500
   BulletSpeed: 500
   Turret: {fileID: 1017053831}
@@ -1430,7 +1430,7 @@ MonoBehaviour:
   LeftTurretRotation: 0
   RightTurretRotation: 0
   RotationSpeed: 100
-  MovementSpeed: 100
+  MovementSpeed: 20
   CannonSpeed: 500
   BulletSpeed: 500
   Turret: {fileID: 306095565}

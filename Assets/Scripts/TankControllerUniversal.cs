@@ -66,11 +66,11 @@ public class TankControllerUniversal : MonoBehaviour
         }
         if (ForwardBodyMovement)
         {
-            AgentRigidBody.transform.Rotate(Vector3.left*Time.deltaTime*MovementSpeed);
+            AgentRigidBody.AddForce(transform.forward* MovementSpeed);
         }
         if (BackwardsBodyMovement)
         {
-            AgentRigidBody.transform.Rotate(Vector3.right*Time.deltaTime*MovementSpeed);
+            AgentRigidBody.AddForce(-transform.forward * MovementSpeed);
         }
         if (FirePrimary)
         {
