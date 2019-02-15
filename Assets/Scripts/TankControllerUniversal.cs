@@ -41,6 +41,13 @@ public class TankControllerUniversal : MonoBehaviour
     public Transform ProjectileSpawnPoint; 
     public Rigidbody Bullet;
     
+    // health system
+    public int StartingHealth;
+    public int CurrentHealth;
+    public bool IsDead;
+    public bool Damaged;
+    public GameObject EnemyTank;
+    public TankControllerUniversal EnemyScript;
 
     void Start()
     {
@@ -48,6 +55,8 @@ public class TankControllerUniversal : MonoBehaviour
         AgentRigidBody = GetComponent<Rigidbody>();
         AgentCollider = GetComponent<BoxCollider>();
         TurretRigidbody = Turret.GetComponent<Rigidbody>();
+         
+        CurrentHealth = StartingHealth;
 
     }
 
@@ -88,6 +97,11 @@ public class TankControllerUniversal : MonoBehaviour
         {
             TurretRigidbody.transform.Rotate(Vector3.up*Time.deltaTime*RotationSpeed);
         }
+        // if (Damaged)
+        // {
+        //     Damaged = false;
+        // }
+        
 
         
     }
@@ -109,8 +123,31 @@ public class TankControllerUniversal : MonoBehaviour
         BulletInstance.AddForce(ProjectileSpawnPoint.forward * BulletSpeed );
         FireSecondary = false;
     }
-
-
+    // script that makes the gameobject this script is attached to take damage
+    public void TakeDamage (int amount)
+    {
+        Damaged = true;
+        Debug.Log('o');
+        CurrentHealth = CurrentHealth - amount;
+        if (CurrentHealth <=0 && !IsDead)
+        {
+            Death();
+        }
+    }
+    // destoys the dead tank
+    void Death()
+    {
+        IsDead = true;
+        Destroy(gameObject);
+    }
+    // gives damage to any tank that the projectile hits
+    public void GiveDamage(Collision Reciever, int amount)
+    {
+        EnemyTank =Reciever.gameObject;
+        EnemyScript= EnemyTank.GetComponent<TankControllerUniversal>();
+        EnemyScript.TakeDamage(amount);
+       
+    }
 
 
 }

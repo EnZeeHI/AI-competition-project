@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 306095570}
   m_Layer: 0
   m_Name: Turret1
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -783,7 +783,7 @@ GameObject:
   - component: {fileID: 1014264721}
   m_Layer: 0
   m_Name: Body1
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -865,6 +865,12 @@ MonoBehaviour:
   Cannon: {fileID: 2385805385695980390, guid: 87185012a89526c4bbd7baecf84cf020, type: 3}
   ProjectileSpawnPoint: {fileID: 1434891453}
   Bullet: {fileID: 7487059715302337121, guid: cfe90f5eca3bcfc4dafe0d0ca984f7b8, type: 3}
+  StartingHealth: 100
+  CurrentHealth: 0
+  IsDead: 0
+  Damaged: 0
+  EnemyTank: {fileID: 1793909812}
+  EnemyScript: {fileID: 0}
 --- !u!54 &1014264723
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -954,7 +960,7 @@ GameObject:
   - component: {fileID: 1017053833}
   m_Layer: 0
   m_Name: Turret1
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1059,7 +1065,7 @@ GameObject:
   - component: {fileID: 1193711185}
   m_Layer: 0
   m_Name: Tank1
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1278,7 +1284,7 @@ GameObject:
   - component: {fileID: 1793909813}
   m_Layer: 0
   m_Name: Tank2
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1316,7 +1322,7 @@ GameObject:
   - component: {fileID: 2015029621}
   m_Layer: 0
   m_Name: Body1
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1437,6 +1443,12 @@ MonoBehaviour:
   Cannon: {fileID: 2385805385695980390, guid: 87185012a89526c4bbd7baecf84cf020, type: 3}
   ProjectileSpawnPoint: {fileID: 326479675}
   Bullet: {fileID: 7487059715302337121, guid: cfe90f5eca3bcfc4dafe0d0ca984f7b8, type: 3}
+  StartingHealth: 100
+  CurrentHealth: 0
+  IsDead: 0
+  Damaged: 0
+  EnemyTank: {fileID: 0}
+  EnemyScript: {fileID: 0}
 --- !u!59 &2015029621
 HingeJoint:
   m_ObjectHideFlags: 0
