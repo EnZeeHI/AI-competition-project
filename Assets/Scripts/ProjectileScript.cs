@@ -24,6 +24,6 @@ public class ProjectileScript : MonoBehaviour
             TankScript.GiveDamage(AgentCollider, AttackDamage);
             
         }
-        Destroy(this);
+        Destroy(gameObject);
     }
 }

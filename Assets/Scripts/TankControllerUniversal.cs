@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TankControllerUniversal : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class TankControllerUniversal : MonoBehaviour
     // defining the Rigidbody and collider of the tank
     private Rigidbody AgentRigidBody;
     private Collider AgentCollider;
+    private GameObject AgentGameObject;
     
     
     // creating speed variables
@@ -49,14 +51,23 @@ public class TankControllerUniversal : MonoBehaviour
     public GameObject EnemyTank;
     public TankControllerUniversal EnemyScript;
 
+    // scoring system
+    public int TankRoundsWon;
+
+    public Scene CurrentScene;
+
     void Start()
     {
         // getting required components and assigning them
         AgentRigidBody = GetComponent<Rigidbody>();
         AgentCollider = GetComponent<BoxCollider>();
         TurretRigidbody = Turret.GetComponent<Rigidbody>();
+        AgentGameObject = this.transform.parent.gameObject;
          
         CurrentHealth = StartingHealth;
+
+        // scene management
+        Scene CurrentScene = SceneManager.GetActiveScene();
 
     }
 
@@ -97,10 +108,7 @@ public class TankControllerUniversal : MonoBehaviour
         {
             TurretRigidbody.transform.Rotate(Vector3.up*Time.deltaTime*RotationSpeed);
         }
-        // if (Damaged)
-        // {
-        //     Damaged = false;
-        // }
+      
         
 
         
@@ -127,27 +135,60 @@ public class TankControllerUniversal : MonoBehaviour
     public void TakeDamage (int amount)
     {
         Damaged = true;
-        Debug.Log('o');
         CurrentHealth = CurrentHealth - amount;
         if (CurrentHealth <=0 && !IsDead)
         {
+           // 
             Death();
         }
     }
-    // destoys the dead tank
+    // destoys the dead tank, resets the scene
     void Death()
     {
         IsDead = true;
-        Destroy(gameObject);
+        
+        Destroy(transform.parent.gameObject);
+        
+        
+      
+        //Invoke("ResetLevel", 0.1f); // the delay breaks the function for some reason
+        ResetLevel();
+        
+
     }
     // gives damage to any tank that the projectile hits
     public void GiveDamage(Collision Reciever, int amount)
     {
-        EnemyTank =Reciever.gameObject;
-        EnemyScript= EnemyTank.GetComponent<TankControllerUniversal>();
+        EnemyTank =Reciever.transform.parent.gameObject;
+        EnemyScript= EnemyTank.GetComponentInChildren<TankControllerUniversal>();
         EnemyScript.TakeDamage(amount);
+        
        
     }
+    // reloads the scene
+    void ResetLevel()
+    {
+        GetScore(1,AgentGameObject);
+        SceneManager.LoadScene("SampleScene");
 
+    }
+    // gives score to the remaining tank(runs on the destroyed tank script)
+    void GetScore(int amount, GameObject ObjectGettingScore)
+    {
+
+        
+        if (ObjectGettingScore.name=="Tank2")
+        {
+            GameStats.Tank1Wins = GameStats.Tank1Wins + amount;
+        }
+        if (ObjectGettingScore.name=="Tank1")
+        {
+            GameStats.Tank2Wins = GameStats.Tank2Wins + amount;
+        }
+        Debug.Log("tank 1 " + GameStats.Tank1Wins);
+        Debug.Log("tank 2 " + GameStats.Tank2Wins);
+
+    }
+   
 
 }
