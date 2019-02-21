@@ -897,6 +897,9 @@ MonoBehaviour:
   Damaged: 0
   EnemyTank: {fileID: 1193711184}
   EnemyScript: {fileID: 0}
+  TankRoundsWon: 0
+  CurrentScene:
+    m_Handle: 0
 --- !u!54 &1014264723
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1547,6 +1550,9 @@ MonoBehaviour:
   Damaged: 0
   EnemyTank: {fileID: 1793909812}
   EnemyScript: {fileID: 0}
+  TankRoundsWon: 0
+  CurrentScene:
+    m_Handle: 0
 --- !u!59 &2015029621
 HingeJoint:
   m_ObjectHideFlags: 0

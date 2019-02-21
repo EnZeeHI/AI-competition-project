@@ -1,4 +1,14 @@
 ﻿
+/*
+
+This script is a database of the variables, that need to be used between scene transitions
+To access the variables simply use GameStats.
+To store the variables use GameStats. = int value
+
+The data is wiped upon closing the game
+
+*/
+
 
 public static class GameStats 
 {

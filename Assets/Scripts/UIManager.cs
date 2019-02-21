@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿/*
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,14 +29,15 @@ public class UIManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    //Update is called once per frame
 
-    // doesnt work right now
-    // void Update()
-    // {
-    //     TextBox1.text = "Tank 1 Health" + Tank1Health.CurrentHealth;
-    //     TextBox2.text = "Tank 2 Health" + Tank2Health.CurrentHealth;
-    //     HealthSlider1.value = Tank1Health.CurrentHealth;
-    //     HealthSlider2.value = Tank2Health.CurrentHealth;
-    // }
+    //doesnt work right now
+    void Update()
+    {
+        TextBox1.text = "Tank 1 Health" + Tank1Health.CurrentHealth;
+        TextBox2.text = "Tank 2 Health" + Tank2Health.CurrentHealth;
+        HealthSlider1.value = Tank1Health.CurrentHealth;
+        HealthSlider2.value = Tank2Health.CurrentHealth;
+    }
 }
+*/
