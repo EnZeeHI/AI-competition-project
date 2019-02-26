@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TankControllerUniversal : MonoBehaviour
+public class TankControllerUniversal : MonoBehaviour, ITankMovement<Rigidbody>, ITankAttacks
 {
     
     
@@ -59,10 +59,10 @@ public class TankControllerUniversal : MonoBehaviour
     void Start()
     {
         // Getting required components and assigning them
-        AgentRigidBody = GetComponent<Rigidbody>();
+        AgentRigidBody = this.GetComponentInChildren<Rigidbody>();
         AgentCollider = GetComponent<BoxCollider>();
         TurretRigidbody = Turret.GetComponent<Rigidbody>();
-        AgentGameObject = this.transform.parent.gameObject;
+        AgentGameObject = this.gameObject;
          
         CurrentHealth = StartingHealth;
 
@@ -75,45 +75,63 @@ public class TankControllerUniversal : MonoBehaviour
     void Update()
     {   
         // Making the tank perform any of its possible actions based on the bool value
+        
+        if (ForwardBodyMovement)
+        {
+            MoveForward(AgentRigidBody);
+        }
+        if (BackwardsBodyMovement)
+        {
+            MoveBackwards(AgentRigidBody);
+        }
         if (LeftBodyRotation)
         {
-            AgentRigidBody.transform.Rotate(Vector3.down*Time.deltaTime*RotationSpeed);
+            RotateLeft(AgentRigidBody);
 
         }
         if (RightBodyRotation)
         {
-            AgentRigidBody.transform.Rotate(Vector3.up*Time.deltaTime*RotationSpeed);
-        }
-        if (ForwardBodyMovement)
-        {
-            AgentRigidBody.AddForce(transform.forward* MovementSpeed);
-        }
-        if (BackwardsBodyMovement)
-        {
-            AgentRigidBody.AddForce(-transform.forward * MovementSpeed);
+            RotateRight(AgentRigidBody);
         }
         if (FirePrimary)
         {
-            primraryFire();
+            PrimraryFire();
         }
         if (FireSecondary)
         {
-            secondaryFire();
+            SecondaryFire();
         }
         if (LeftTurretRotation)
         {
-            TurretRigidbody.transform.Rotate(Vector3.down*Time.deltaTime*RotationSpeed);
+            RotateLeft(TurretRigidbody);
         }
         if (RightTurretRotation)
         {
-            TurretRigidbody.transform.Rotate(Vector3.up*Time.deltaTime*RotationSpeed);
+            RotateRight(TurretRigidbody);
         }
       
         
 
         
     }
-    void primraryFire()
+    public void MoveForward(Rigidbody Body)
+    {
+        Body.AddForce(transform.forward* MovementSpeed);
+    }
+    public void MoveBackwards(Rigidbody Body)
+    {
+        Body.AddForce(-transform.forward * MovementSpeed);
+    }
+    public void RotateLeft(Rigidbody Body)
+    {
+        Body.transform.Rotate(Vector3.down*Time.deltaTime*RotationSpeed);
+    }
+    public void RotateRight(Rigidbody Body)
+    {
+        Body.transform.Rotate(Vector3.up*Time.deltaTime*RotationSpeed);
+    }
+    
+    public void PrimraryFire()
     {   
         // Instantiating prefab, giving it movement speed and disbling the action ( prevent looping based on framerate )
         Rigidbody CannonInstance;
@@ -122,7 +140,7 @@ public class TankControllerUniversal : MonoBehaviour
         CannonInstance.AddForce(ProjectileSpawnPoint.forward * CannonSpeed);
         FirePrimary = false;
     }
-    void secondaryFire()
+    public void SecondaryFire()
     {   
         // Instantiating prefab, giving it movement speed and disbling the action ( prevent looping based on framerate )
         Rigidbody BulletInstance;
@@ -146,7 +164,7 @@ public class TankControllerUniversal : MonoBehaviour
     {
         IsDead = true;
         
-        Destroy(transform.parent.gameObject);
+        Destroy(gameObject);
         
         
         // the delay breaks the function for some reason

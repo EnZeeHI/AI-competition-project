@@ -604,7 +604,6 @@ GameObject:
   - component: {fileID: 534669906}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
-  - component: {fileID: 534669905}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -662,26 +661,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &534669905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78d2ebb043c6c044db0206e40dff9528, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TextBox1: {fileID: 0}
-  TextBox2: {fileID: 0}
-  Tank1: {fileID: 1193711184}
-  Tank2: {fileID: 1793909812}
-  Tank1Health: {fileID: 0}
-  Tank2Health: {fileID: 0}
-  HealthSlider1: {fileID: 0}
-  HealthSlider2: {fileID: 0}
 --- !u!224 &534669906
 RectTransform:
   m_ObjectHideFlags: 0
@@ -870,7 +849,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1014264719}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 322675b87a3b1814f83472e179935418, type: 3}
   m_Name: 
@@ -897,7 +876,6 @@ MonoBehaviour:
   Damaged: 0
   EnemyTank: {fileID: 1193711184}
   EnemyScript: {fileID: 0}
-  TankRoundsWon: 0
   CurrentScene:
     m_Handle: 0
 --- !u!54 &1014264723
@@ -1094,6 +1072,7 @@ GameObject:
   - component: {fileID: 1193711188}
   - component: {fileID: 1193711187}
   - component: {fileID: 1193711186}
+  - component: {fileID: 1193711185}
   m_Layer: 0
   m_Name: Tank1
   m_TagString: Tank
@@ -1101,6 +1080,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1193711185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193711184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322675b87a3b1814f83472e179935418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftBodyRotation: 0
+  RightBodyRotation: 0
+  ForwardBodyMovement: 0
+  BackwardsBodyMovement: 0
+  FirePrimary: 0
+  FireSecondary: 0
+  LeftTurretRotation: 0
+  RightTurretRotation: 0
+  RotationSpeed: 100
+  MovementSpeed: 20
+  CannonSpeed: 1000
+  BulletSpeed: 1000
+  Turret: {fileID: 306095565}
+  Cannon: {fileID: 2385805385695980390, guid: 87185012a89526c4bbd7baecf84cf020, type: 3}
+  ProjectileSpawnPoint: {fileID: 326479675}
+  Bullet: {fileID: 7487059715302337121, guid: cfe90f5eca3bcfc4dafe0d0ca984f7b8, type: 3}
+  StartingHealth: 100
+  CurrentHealth: 0
+  IsDead: 0
+  Damaged: 0
+  EnemyTank: {fileID: 1793909812}
+  EnemyScript: {fileID: 0}
+  CurrentScene:
+    m_Handle: 0
 --- !u!222 &1193711186
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1364,6 +1379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1793909815}
   - component: {fileID: 1793909814}
+  - component: {fileID: 1793909813}
   m_Layer: 0
   m_Name: Tank2
   m_TagString: Tank
@@ -1371,6 +1387,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1793909813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793909812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322675b87a3b1814f83472e179935418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftBodyRotation: 0
+  RightBodyRotation: 0
+  ForwardBodyMovement: 0
+  BackwardsBodyMovement: 0
+  FirePrimary: 0
+  FireSecondary: 0
+  LeftTurretRotation: 0
+  RightTurretRotation: 0
+  RotationSpeed: 100
+  MovementSpeed: 20
+  CannonSpeed: 1000
+  BulletSpeed: 1000
+  Turret: {fileID: 1017053831}
+  Cannon: {fileID: 2385805385695980390, guid: 87185012a89526c4bbd7baecf84cf020, type: 3}
+  ProjectileSpawnPoint: {fileID: 1434891453}
+  Bullet: {fileID: 7487059715302337121, guid: cfe90f5eca3bcfc4dafe0d0ca984f7b8, type: 3}
+  StartingHealth: 100
+  CurrentHealth: 0
+  IsDead: 0
+  Damaged: 0
+  EnemyTank: {fileID: 1193711184}
+  EnemyScript: {fileID: 0}
+  CurrentScene:
+    m_Handle: 0
 --- !u!222 &1793909814
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1523,7 +1575,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015029614}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 322675b87a3b1814f83472e179935418, type: 3}
   m_Name: 
@@ -1538,8 +1590,8 @@ MonoBehaviour:
   RightTurretRotation: 0
   RotationSpeed: 100
   MovementSpeed: 20
-  CannonSpeed: 500
-  BulletSpeed: 500
+  CannonSpeed: 1000
+  BulletSpeed: 1000
   Turret: {fileID: 306095565}
   Cannon: {fileID: 2385805385695980390, guid: 87185012a89526c4bbd7baecf84cf020, type: 3}
   ProjectileSpawnPoint: {fileID: 326479675}
@@ -1550,7 +1602,6 @@ MonoBehaviour:
   Damaged: 0
   EnemyTank: {fileID: 1793909812}
   EnemyScript: {fileID: 0}
-  TankRoundsWon: 0
   CurrentScene:
     m_Handle: 0
 --- !u!59 &2015029621
