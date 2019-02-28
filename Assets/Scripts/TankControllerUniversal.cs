@@ -115,6 +115,7 @@ public class TankControllerUniversal : MonoBehaviour, ITank
             Death();
         }
     }
+<<<<<<< HEAD
     public Vector3 GetRotation()
     {
         return AgentRigidBody.transform.rotation.eulerAngles;
@@ -128,25 +129,31 @@ public class TankControllerUniversal : MonoBehaviour, ITank
     {
         return CurrentHealth;
     }
+=======
+
+>>>>>>> parent of 836b4ae... Revert "Redo Road"
     // Destoys the dead tank, Resets the scene
     void Death()
     {
         IsDead = true;
         Destroy(gameObject);      
     }
+
     // Gives damage to any tank that the projectile hits
     public void GiveDamage(Collision Reciever, int amount)
     {
-        EnemyTank =Reciever.transform.parent.gameObject;
+        EnemyTank = Reciever.transform.parent.gameObject;
         EnemyScript= EnemyTank.GetComponentInChildren<TankControllerUniversal>();
         EnemyScript.TakeDamage(amount);       
     }
+
     // Reloads the scene
     void ResetLevel()
     {
-        GetScore(1,AgentGameObject);
+        GetScore(1, AgentGameObject);
         SceneManager.LoadScene("SampleScene");
     }
+
     // Gives score to the remaining tank(runs on the destroyed tank script)
     void GetScore(int amount, GameObject ObjectGettingScore)
     {
