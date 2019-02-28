@@ -132,10 +132,7 @@ public class TankControllerUniversal : MonoBehaviour, ITank
     void Death()
     {
         IsDead = true;
-        Destroy(gameObject);
-        // the delay breaks the function for some reason
-        //Invoke("ResetLevel", 0.1f); 
-        ResetLevel();
+        Destroy(gameObject);      
     }
     // Gives damage to any tank that the projectile hits
     public void GiveDamage(Collision Reciever, int amount)
