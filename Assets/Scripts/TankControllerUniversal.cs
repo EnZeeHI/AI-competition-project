@@ -120,7 +120,10 @@ public class TankControllerUniversal : MonoBehaviour, ITankMovement<Rigidbody>, 
             Death();
         }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of c6c08b0... Cleaned out unnecesary parameters
     // Destoys the dead tank, Resets the scene
     void Death()
     {
