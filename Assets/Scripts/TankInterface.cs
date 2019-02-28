@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ITankMovement<T>
+public interface ITank
 {
-    void MoveForward(T Body);
-    void MoveBackwards(T Body);
-    void RotateLeft(T Body);
-    void RotateRight(T Body);
-    
-}
-public interface ITankAttacks
-{
+    void MoveForward();
+    void MoveBackwards();
+    void RotateLeft();
+    void RotateRight();
+    Vector3 GetRotation();
+    Vector2 GetPosition();
+    int GetHealth();
     void PrimraryFire();
+
+    
 }
 

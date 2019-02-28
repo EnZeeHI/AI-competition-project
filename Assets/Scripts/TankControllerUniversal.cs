@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TankControllerUniversal : MonoBehaviour, ITankMovement<Rigidbody>, ITankAttacks
+public class TankControllerUniversal : MonoBehaviour, ITank
 {
     // Defining possible tank actions
     public bool LeftBodyRotation;
@@ -21,11 +21,7 @@ public class TankControllerUniversal : MonoBehaviour, ITankMovement<Rigidbody>, 
     public float RotationSpeed;
     public float MovementSpeed;
     public float CannonSpeed;
-    
-    // Defining the turret object and rigidbody
-    public GameObject Turret;
-    private Rigidbody TurretRigidbody;
-    
+        
     // Defining projectiles and their spawn point
     public Rigidbody Cannon;
     public Transform ProjectileSpawnPoint; 
@@ -47,7 +43,6 @@ public class TankControllerUniversal : MonoBehaviour, ITankMovement<Rigidbody>, 
         // Getting required components and assigning them
         AgentRigidBody = this.GetComponentInChildren<Rigidbody>();
         AgentCollider = GetComponent<BoxCollider>();
-        TurretRigidbody = Turret.GetComponent<Rigidbody>();
         AgentGameObject = this.gameObject;
          
         CurrentHealth = StartingHealth;
@@ -64,40 +59,40 @@ public class TankControllerUniversal : MonoBehaviour, ITankMovement<Rigidbody>, 
         
         if (ForwardBodyMovement)
         {
-            MoveForward(AgentRigidBody);
+            MoveForward();
         }
         if (BackwardsBodyMovement)
         {
-            MoveBackwards(AgentRigidBody);
+            MoveBackwards();
         }
         if (LeftBodyRotation)
         {
-            RotateLeft(AgentRigidBody);
+            RotateLeft();
         }
         if (RightBodyRotation)
         {
-            RotateRight(AgentRigidBody);
+            RotateRight();
         }
         if (FirePrimary)
         {
             PrimraryFire();
         }           
     }
-    public void MoveForward(Rigidbody Body)
+    public void MoveForward()
     {
-        Body.AddForce(transform.forward* MovementSpeed);
+        AgentRigidBody.velocity = AgentRigidBody.transform.forward* MovementSpeed;
     }
-    public void MoveBackwards(Rigidbody Body)
+    public void MoveBackwards()
     {
-        Body.AddForce(-transform.forward * MovementSpeed);
+        AgentRigidBody.velocity= AgentRigidBody.transform.forward * -MovementSpeed;
     }
-    public void RotateLeft(Rigidbody Body)
+    public void RotateLeft()
     {
-        Body.transform.Rotate(Vector3.down*Time.deltaTime*RotationSpeed);
+        AgentRigidBody.transform.Rotate(Vector3.down*Time.deltaTime*RotationSpeed);
     }
-    public void RotateRight(Rigidbody Body)
+    public void RotateRight()
     {
-        Body.transform.Rotate(Vector3.up*Time.deltaTime*RotationSpeed);
+        AgentRigidBody.transform.Rotate(Vector3.up*Time.deltaTime*RotationSpeed);
     }
     
     public void PrimraryFire()
@@ -119,6 +114,19 @@ public class TankControllerUniversal : MonoBehaviour, ITankMovement<Rigidbody>, 
         {
             Death();
         }
+    }
+    public Vector3 GetRotation()
+    {
+        return AgentRigidBody.transform.rotation.eulerAngles;
+    }
+
+    public Vector2 GetPosition()
+    {
+        return AgentRigidBody.transform.position;
+    }
+    public int GetHealth()
+    {
+        return CurrentHealth;
     }
     // Destoys the dead tank, Resets the scene
     void Death()
