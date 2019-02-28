@@ -120,7 +120,6 @@ public class TankControllerUniversal : MonoBehaviour, ITankMovement<Rigidbody>, 
             Death();
         }
     }
-
     // Destoys the dead tank, Resets the scene
     void Death()
     {
@@ -130,22 +129,19 @@ public class TankControllerUniversal : MonoBehaviour, ITankMovement<Rigidbody>, 
         //Invoke("ResetLevel", 0.1f); 
         ResetLevel();
     }
-
     // Gives damage to any tank that the projectile hits
     public void GiveDamage(Collision Reciever, int amount)
     {
-        EnemyTank = Reciever.transform.parent.gameObject;
+        EnemyTank =Reciever.transform.parent.gameObject;
         EnemyScript= EnemyTank.GetComponentInChildren<TankControllerUniversal>();
         EnemyScript.TakeDamage(amount);       
     }
-
     // Reloads the scene
     void ResetLevel()
     {
-        GetScore(1, AgentGameObject);
+        GetScore(1,AgentGameObject);
         SceneManager.LoadScene("SampleScene");
     }
-
     // Gives score to the remaining tank(runs on the destroyed tank script)
     void GetScore(int amount, GameObject ObjectGettingScore)
     {
