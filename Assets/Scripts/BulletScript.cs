@@ -10,7 +10,9 @@ public class BulletScript : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision collision){
-        collision.gameObject.GetComponent<TankControlScript>().damage();
+        TankControlScript tcs = collision.gameObject.GetComponent<TankControlScript>();
+        if (tcs!=null) tcs.damage();
+
         Destroy(gameObject);
     }
 }

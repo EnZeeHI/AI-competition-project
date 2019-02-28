@@ -9,25 +9,22 @@ public class Finish : MonoBehaviour
     private Transform winner = null;
 
     [SerializeField] private Transform roundTrackers;
-
-    void Update()
-    {
-        
-    }
+    [SerializeField] private GameObject screen;
+    [SerializeField] private Text textField;
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag.Equals("Tank"))
+        if (other.gameObject.tag.Equals("Tank") && other.GetType() == typeof(BoxCollider))
         {
             foreach(Transform tracker in roundTrackers)
             {
                 PlayerRounds playerRounds = tracker.GetComponent<PlayerRounds>();
                 if (playerRounds != null)
                 {
-                    if (playerRounds.HitFinish(other.gameObject))
+                    if (playerRounds.HitFinish(other.gameObject) && !hasWinner)
                     {
                         winner = tracker;
-                        return;
+                        hasWinner = true;
                     }
                         
                 }
@@ -35,7 +32,9 @@ public class Finish : MonoBehaviour
 
             if(winner!= null)
             {
-                Debug.Log(winner + " has won");
+                screen.SetActive(true);
+                textField.text = winner.name;
+                Debug.Log(winner.name + " has won");
             }
         }
     }

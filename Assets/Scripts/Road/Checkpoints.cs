@@ -8,6 +8,7 @@ public class Checkpoints : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other + " hits checkpoint " + checkpointNr);
+        if (other.GetType() == typeof(SphereCollider))
+            Debug.Log(other.name + " hits checkpoint " + checkpointNr);
     }
 }
