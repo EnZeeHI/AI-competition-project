@@ -29,6 +29,9 @@ public class TankControlScript : MonoBehaviour {
     // bool for testing/debug purposes
     public bool aiControl = false;
 
+    // timer int
+    int shootTimer = 0;
+
     public void damage(){
         Debug.Log("ouch");
     }
@@ -44,18 +47,24 @@ public class TankControlScript : MonoBehaviour {
             turretRotation += Input.GetAxis("Turret") * 3;
             tankTurret.transform.eulerAngles = new Vector3(0, turretRotation, 0);
 
-            treadRotation += Input.GetAxis("Horizontal") * 2;
+            treadRotation += Input.GetAxis("Horizontal") * 5;
             tankTreads.transform.eulerAngles = new Vector3(0, treadRotation, 0);
 
-            moveSpeed = Input.GetAxis("Vertical") * -10;
-            rB.velocity = tankTreads.transform.forward * moveSpeed;
+            moveSpeed = Input.GetAxis("Vertical") * 600;
+            rB.AddForce(tankTreads.transform.forward * moveSpeed);
 
             if (Input.GetKeyDown(KeyCode.Space)) {
                 GameObject bullet = Instantiate(Projectile, shooty.transform.position, shooty.transform.rotation) as GameObject;
                 bullet.GetComponent<Rigidbody>().AddForce(transform.forward);
             }
         }
-        if (aiControl == true){
+        if (aiControl){
+            Debug.Log(shootTimer);
+            if (shootTimer > 60){
+                canShoot = true;
+                shootTimer = 0;
+                Debug.Log(shootTimer);
+            }
             if (LeftBodyRotation) {
                 tankTreads.transform.eulerAngles += new Vector3(0, -2, 0);
             }
@@ -69,9 +78,15 @@ public class TankControlScript : MonoBehaviour {
                 rB.velocity = tankTreads.transform.forward * 10;
             }
             if (FirePrimary) {
-                canShoot = false;
-                GameObject bullet = Instantiate(Projectile, shooty.transform.position, shooty.transform.rotation) as GameObject;
-                bullet.GetComponent<Rigidbody>().AddForce(transform.forward);
+                if (canShoot){
+                    GameObject bullet = Instantiate(Projectile, shooty.transform.position, shooty.transform.rotation) as GameObject;
+                    bullet.GetComponent<Rigidbody>().AddForce(transform.forward);
+                    canShoot = false;
+                    Debug.Log(canShoot);
+                }
+            }
+            if (canShoot = false){
+                shootTimer += 1;
             }
             if (LeftTurretRotation) {
                 tankTurret.transform.eulerAngles += new Vector3(0, -3, 0);
@@ -79,7 +94,6 @@ public class TankControlScript : MonoBehaviour {
             if (RightTurretRotation) {
                 tankTurret.transform.eulerAngles += new Vector3(0, 3, 0);
             }
-            canShoot = true;
         }
     }
 }
