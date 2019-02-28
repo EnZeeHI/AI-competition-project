@@ -10,17 +10,11 @@ public class Finish : MonoBehaviour
 
     [SerializeField] private Transform roundTrackers;
 
-<<<<<<< HEAD
     void Update()
     {
         
     }
 
-=======
-    [SerializeField] private GameObject winnerScreen;
-    [SerializeField] private Text nameWinner;
-    
->>>>>>> parent of 836b4ae... Revert "Redo Road"
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag.Equals("Tank"))
