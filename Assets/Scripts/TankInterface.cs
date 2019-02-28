@@ -13,6 +13,5 @@ public interface ITankMovement<T>
 public interface ITankAttacks
 {
     void PrimraryFire();
-    void SecondaryFire();
 }
 
