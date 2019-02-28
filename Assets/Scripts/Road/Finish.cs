@@ -10,32 +10,32 @@ public class Finish : MonoBehaviour
 
     [SerializeField] private Transform roundTrackers;
 
-    [SerializeField] private GameObject winnerScreen;
-    [SerializeField] private Text nameWinner;
-    
+    void Update()
+    {
+        
+    }
+
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag.Equals("Tank") && other.GetType() == typeof(SphereCollider))
+        if (other.gameObject.tag.Equals("Tank"))
         {
             foreach(Transform tracker in roundTrackers)
             {
                 PlayerRounds playerRounds = tracker.GetComponent<PlayerRounds>();
                 if (playerRounds != null)
                 {
-                    if (playerRounds.HitFinish(other.gameObject) && !hasWinner)
+                    if (playerRounds.HitFinish(other.gameObject))
                     {
                         winner = tracker;
-                        hasWinner = true;
+                        return;
                     }
                         
                 }
             }
 
-            if(winner != null)
+            if(winner!= null)
             {
                 Debug.Log(winner + " has won");
-                winnerScreen.SetActive(true);
-                nameWinner.text = winner.name;
             }
         }
     }

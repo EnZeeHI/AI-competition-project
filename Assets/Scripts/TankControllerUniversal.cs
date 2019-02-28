@@ -3,45 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TankControllerUniversal : MonoBehaviour, ITankMovement<Rigidbody>, ITankAttacks
+public class TankControllerUniversal : MonoBehaviour, ITank
 {
-    
-    
     // Defining possible tank actions
     public bool LeftBodyRotation;
     public bool RightBodyRotation;
     public bool ForwardBodyMovement;
     public bool BackwardsBodyMovement;
     public bool FirePrimary;
-    public bool FireSecondary;
-    public bool LeftTurretRotation;
-    public bool RightTurretRotation;
-
-
 
     // Defining the Rigidbody, Collider and GameObject of the tank
     private Rigidbody AgentRigidBody;
     private Collider AgentCollider;
     private GameObject AgentGameObject;
     
-    
     // Creating speed variables
     public float RotationSpeed;
     public float MovementSpeed;
     public float CannonSpeed;
-    public float BulletSpeed;
-    
-    
-    // Defining the turret object and rigidbody
-    public GameObject Turret;
-    private Rigidbody TurretRigidbody;
-    
-    
-    
+        
     // Defining projectiles and their spawn point
     public Rigidbody Cannon;
     public Transform ProjectileSpawnPoint; 
-    public Rigidbody Bullet;
     
     // Health System
     public int StartingHealth;
@@ -53,7 +36,6 @@ public class TankControllerUniversal : MonoBehaviour, ITankMovement<Rigidbody>, 
     
     // Scene Management
     public Scene CurrentScene;
-
     
     // Start is called before the first frame update
     void Start()
@@ -61,7 +43,6 @@ public class TankControllerUniversal : MonoBehaviour, ITankMovement<Rigidbody>, 
         // Getting required components and assigning them
         AgentRigidBody = this.GetComponentInChildren<Rigidbody>();
         AgentCollider = GetComponent<BoxCollider>();
-        TurretRigidbody = Turret.GetComponent<Rigidbody>();
         AgentGameObject = this.gameObject;
          
         CurrentHealth = StartingHealth;
@@ -78,57 +59,40 @@ public class TankControllerUniversal : MonoBehaviour, ITankMovement<Rigidbody>, 
         
         if (ForwardBodyMovement)
         {
-            MoveForward(AgentRigidBody);
+            MoveForward();
         }
         if (BackwardsBodyMovement)
         {
-            MoveBackwards(AgentRigidBody);
+            MoveBackwards();
         }
         if (LeftBodyRotation)
         {
-            RotateLeft(AgentRigidBody);
-
+            RotateLeft();
         }
         if (RightBodyRotation)
         {
-            RotateRight(AgentRigidBody);
+            RotateRight();
         }
         if (FirePrimary)
         {
             PrimraryFire();
-        }
-        if (FireSecondary)
-        {
-            SecondaryFire();
-        }
-        if (LeftTurretRotation)
-        {
-            RotateLeft(TurretRigidbody);
-        }
-        if (RightTurretRotation)
-        {
-            RotateRight(TurretRigidbody);
-        }
-      
-        
-
-        
+        }           
     }
-    public void MoveForward(Rigidbody Body)
+    public void MoveForward()
     {
-        Body.AddForce(transform.forward* MovementSpeed);
+        AgentRigidBody.velocity = AgentRigidBody.transform.forward* MovementSpeed;
     }
-    public void MoveBackwards(Rigidbody Body)
+    public void MoveBackwards()
     {
-        Body.AddForce(-transform.forward * MovementSpeed);
+        AgentRigidBody.velocity= AgentRigidBody.transform.forward * -MovementSpeed;
     }
-    public void RotateLeft(Rigidbody Body)
+    public void RotateLeft()
     {
-        Body.transform.Rotate(Vector3.down*Time.deltaTime*RotationSpeed);
+        AgentRigidBody.transform.Rotate(Vector3.down*Time.deltaTime*RotationSpeed);
     }
-    public void RotateRight(Rigidbody Body)
+    public void RotateRight()
     {
-        Body.transform.Rotate(Vector3.up*Time.deltaTime*RotationSpeed);
+        AgentRigidBody.transform.Rotate(Vector3.up*Time.deltaTime*RotationSpeed);
     }
     
     public void PrimraryFire()
@@ -140,15 +104,7 @@ public class TankControllerUniversal : MonoBehaviour, ITankMovement<Rigidbody>, 
         CannonInstance.AddForce(ProjectileSpawnPoint.forward * CannonSpeed);
         FirePrimary = false;
     }
-    public void SecondaryFire()
-    {   
-        // Instantiating prefab, giving it movement speed and disbling the action ( prevent looping based on framerate )
-        Rigidbody BulletInstance;
-        BulletInstance = Instantiate(Bullet,ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation )
-        as Rigidbody;
-        BulletInstance.AddForce(ProjectileSpawnPoint.forward * BulletSpeed );
-        FireSecondary = false;
-    }
+   
     // Script that makes the gameobject this script is attached to take damage
     public void TakeDamage (int amount)
     {
@@ -159,48 +115,41 @@ public class TankControllerUniversal : MonoBehaviour, ITankMovement<Rigidbody>, 
             Death();
         }
     }
-<<<<<<< HEAD
+    public Vector3 GetRotation()
+    {
+        return AgentRigidBody.transform.rotation.eulerAngles;
+    }
 
-=======
->>>>>>> parent of c6c08b0... Cleaned out unnecesary parameters
+    public Vector2 GetPosition()
+    {
+        return AgentRigidBody.transform.position;
+    }
+    public int GetHealth()
+    {
+        return CurrentHealth;
+    }
     // Destoys the dead tank, Resets the scene
     void Death()
     {
         IsDead = true;
-        
-        Destroy(gameObject);
-        
-        
-        // the delay breaks the function for some reason
-        //Invoke("ResetLevel", 0.1f); 
-        ResetLevel();
-        
-
+        Destroy(gameObject);      
     }
-
     // Gives damage to any tank that the projectile hits
     public void GiveDamage(Collision Reciever, int amount)
     {
-        EnemyTank = Reciever.transform.parent.gameObject;
+        EnemyTank =Reciever.transform.parent.gameObject;
         EnemyScript= EnemyTank.GetComponentInChildren<TankControllerUniversal>();
-        EnemyScript.TakeDamage(amount);
-        
-       
+        EnemyScript.TakeDamage(amount);       
     }
-
     // Reloads the scene
     void ResetLevel()
     {
-        GetScore(1, AgentGameObject);
+        GetScore(1,AgentGameObject);
         SceneManager.LoadScene("SampleScene");
-
     }
-
     // Gives score to the remaining tank(runs on the destroyed tank script)
     void GetScore(int amount, GameObject ObjectGettingScore)
     {
-
-        
         if (ObjectGettingScore.name=="Tank2")
         {
             GameStats.Tank1Wins = GameStats.Tank1Wins + amount;
@@ -211,8 +160,5 @@ public class TankControllerUniversal : MonoBehaviour, ITankMovement<Rigidbody>, 
         }
         Debug.Log("tank 1 " + GameStats.Tank1Wins);
         Debug.Log("tank 2 " + GameStats.Tank2Wins);
-
     }
-   
-
 }
