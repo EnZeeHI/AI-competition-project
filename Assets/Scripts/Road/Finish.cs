@@ -12,12 +12,7 @@ public class Finish : MonoBehaviour
 
     [SerializeField] private GameObject winnerScreen;
     [SerializeField] private Text nameWinner;
-
-    void Update()
-    {
-        
-    }
-
+    
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag.Equals("Tank") && other.GetType() == typeof(SphereCollider))
