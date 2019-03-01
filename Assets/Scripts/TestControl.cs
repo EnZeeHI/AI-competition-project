@@ -6,6 +6,11 @@ public class TestControl : MonoBehaviour
 {
     [SerializeField] private ControllerUniversal tcu;
 
+    private void Start()
+    {
+        tcu = gameObject.GetComponent<ControllerUniversal>();
+    }
+
     // Update is called once per frame
     void Update()
     {
