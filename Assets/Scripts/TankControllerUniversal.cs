@@ -168,7 +168,7 @@ public class TankControllerUniversal : MonoBehaviour, ITank
         Debug.Log("tank 2 " + GameStats.Tank2Wins);
     }
 
-    void NextCheckPoint()
+    public bool NextCheckPoint()
     {
         // Bit shift the index of the layer (8) to get a bit mask
         int layerMask = 1 << 9;
@@ -179,11 +179,13 @@ public class TankControllerUniversal : MonoBehaviour, ITank
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             Debug.Log("Did Hit");
+            return true;
         }
         else
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
             Debug.Log("Did not Hit");
+            return false;
         }
     }
 }
