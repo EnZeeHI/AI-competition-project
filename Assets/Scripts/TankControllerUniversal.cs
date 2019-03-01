@@ -12,6 +12,8 @@ public class TankControllerUniversal : MonoBehaviour, ITank
     public bool BackwardsBodyMovement;
     public bool FirePrimary;
 
+    public bool checkPoint;
+
     // Defining the Rigidbody, Collider and GameObject of the tank
     private Rigidbody AgentRigidBody;
     private Collider AgentCollider;
@@ -76,7 +78,11 @@ public class TankControllerUniversal : MonoBehaviour, ITank
         if (FirePrimary)
         {
             PrimraryFire();
-        }           
+        }
+        if (checkPoint)
+        {
+            NextCheckPoint();
+        }
     }
     public void MoveForward()
     {
@@ -160,5 +166,24 @@ public class TankControllerUniversal : MonoBehaviour, ITank
         }
         Debug.Log("tank 1 " + GameStats.Tank1Wins);
         Debug.Log("tank 2 " + GameStats.Tank2Wins);
+    }
+
+    void NextCheckPoint()
+    {
+        // Bit shift the index of the layer (8) to get a bit mask
+        int layerMask = 1 << 9;
+
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+            Debug.Log("Did Hit");
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+            Debug.Log("Did not Hit");
+        }
     }
 }
