@@ -24,7 +24,7 @@ public class TestControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F)) tcu.PrimraryFire();
 
         // Test keypoint
-        if (Input.GetKeyDown(KeyCode.R)) tcu.NextCheckPoint();
+        if (Input.GetKeyDown(KeyCode.R)) tcu.NextCheckPoint(Vector3.forward);
 
         // Test rotation & Position
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -37,7 +37,8 @@ public class TestControl : MonoBehaviour
             Debug.Log("Current health: " + tcu.GetHealth());
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
-            tcu.NextCheckPoint();
-
+        {
+            Debug.Log("distance: " + tcu.NextCheckPoint(Vector3.forward));
+        }
     }
 }
