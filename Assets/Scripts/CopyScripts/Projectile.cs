@@ -32,7 +32,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void ShootCannon(GameObject tank, float speed)
+    public void ShootCannon(GameObject tank, float speed, Vector3 direction)
     {
         shootingTank = tank;
         //Rigidbody cannonBody = gameObject.GetComponent<Rigidbody>();
@@ -40,7 +40,7 @@ public class Projectile : MonoBehaviour
 
         shooting = true;
         start = transform.position;
-        end = tank.transform.position + (tank.transform.forward * distance);
+        end = tank.transform.position + direction;
 
         cannonSpeed = speed;
         startTime = Time.time;

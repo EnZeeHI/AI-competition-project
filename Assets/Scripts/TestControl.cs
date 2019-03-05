@@ -24,7 +24,12 @@ public class TestControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F)) tcu.PrimraryFire();
 
         // Test keypoint
+<<<<<<< HEAD
         if (Input.GetKeyDown(KeyCode.R)) tcu.NextCheckPoint(Vector3.forward);
+=======
+        int layer = 1 << 9;
+        if (Input.GetKeyDown(KeyCode.R)) tcu.NextCheckPoint(Vector3.forward * 5, layer);
+>>>>>>> master
 
         // Test rotation & Position
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -37,8 +42,12 @@ public class TestControl : MonoBehaviour
             Debug.Log("Current health: " + tcu.GetHealth());
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
+<<<<<<< HEAD
         {
             Debug.Log("distance: " + tcu.NextCheckPoint(Vector3.forward));
         }
+=======
+            tcu.NextCheckPoint(Vector3.forward * 5, layer);
+>>>>>>> master
     }
 }
