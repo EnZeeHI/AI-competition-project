@@ -52,7 +52,7 @@ public class ControllerUniversal : MonoBehaviour, ITank
     {   
         // Instantiating prefab, giving it movement speed and disbling the action ( prevent looping based on framerate )
         Projectile cannonInstance = Instantiate(cannon, projectileSpawnPoint.position, projectileSpawnPoint.rotation).GetComponent<Projectile>();
-        if (cannonInstance != null) cannonInstance.ShootCannon(this.gameObject, cannonSpeed);
+        if (cannonInstance != null) cannonInstance.ShootCannon(this.gameObject, cannonSpeed, (Vector3.forward * 10));
     }
    
     // Script that makes the gameobject this script is attached to take damage
@@ -95,25 +95,19 @@ public class ControllerUniversal : MonoBehaviour, ITank
         ControllerUniversal enemyScript = enemyTank.GetComponent<ControllerUniversal>();
         if(enemyScript != null) enemyScript.TakeDamage(amount);       
     }
-
-    public bool NextCheckPoint()
+    
+    public RaycastHit NextCheckPoint(Vector3 direction, int layerMask)
     {
         // Bit shift the index of the layer (8) to get a bit mask
-        int layerMask = 1 << 9;
+        // int layerMask = 1 << 9;
 
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(direction), out hit, Mathf.Infinity, layerMask))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+            Debug.DrawRay(transform.position, transform.TransformDirection(direction) * hit.distance, Color.yellow);
             Debug.Log("Did Hit");
-            return true;
         }
-        else
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-            Debug.Log("Did not Hit");
-            return false;
-        }
+        return hit;
     }
 }
