@@ -81,7 +81,8 @@ public class TankControllerUniversal : MonoBehaviour, ITank
         }
         if (checkPoint)
         {
-            NextCheckPoint(Vector3.forward);
+            int layer = 1 << 9;
+            CastRayCast(Vector3.forward, layer);
         }
     }
     public void MoveForward()
@@ -168,19 +169,19 @@ public class TankControllerUniversal : MonoBehaviour, ITank
         Debug.Log("tank 2 " + GameStats.Tank2Wins);
     }
 
-    public float NextCheckPoint(Vector3 direction)
+    // Cast Raycast to find object within direction
+    public RaycastHit CastRayCast(Vector3 direction, int layerMask)
     {
-        // Bit shift the index of the layer (8) to get a bit mask
-        int layerMask = 1 << 9;
+        // Set layermask to layer of checkpoints
+        // int layerMask = 1 << 9;
 
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
         if (Physics.Raycast(transform.position, transform.TransformDirection(direction), out hit, Mathf.Infinity, layerMask))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(direction) * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
-            return hit.distance;
+            return hit;
         }
-        return Mathf.Infinity;
+        return hit;
     }
 }
