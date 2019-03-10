@@ -6,7 +6,7 @@ public class BulletScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update(){
-        GetComponent<Rigidbody>().velocity = transform.up * 20;
+        GetComponent<Rigidbody>().velocity = transform.up * 50;
     }
 
     void OnCollisionEnter(Collision collision){

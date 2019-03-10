@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControllerUniversal : MonoBehaviour, ITank
+public class ControllerUniversal : MonoBehaviour
+// , ITank
 {
     // Defining the Rigidbody, Collider and GameObject of the tank
     private Rigidbody body;
