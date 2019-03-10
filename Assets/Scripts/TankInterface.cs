@@ -6,9 +6,9 @@ public interface ITank
 {
     void Move(int speed);
     void Rotate(int rot);
-    decimal GetRotation();
+    float GetRotation();
     Vector2 GetPosition();
     int GetHealth();
-    void PrimraryFire();
+    void PrimaryFire();
 }
 

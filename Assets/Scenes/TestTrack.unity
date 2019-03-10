@@ -6876,6 +6876,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1574583e8f83f458c690b4542c3a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shooty: {fileID: 5373514980130868074}
+  Projectile: {fileID: 1544411954435465414, guid: 87185012a89526c4bbd7baecf84cf020,
+    type: 3}
 --- !u!23 &5373514981962681968
 MeshRenderer:
   m_ObjectHideFlags: 0
