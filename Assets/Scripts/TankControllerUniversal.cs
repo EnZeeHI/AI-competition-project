@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TankControllerUniversal : MonoBehaviour, ITank
+public class TankControllerUniversal : MonoBehaviour
+// , ITank
 {
     // Defining possible tank actions
     public bool LeftBodyRotation;

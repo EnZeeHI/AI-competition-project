@@ -31,7 +31,7 @@ public class TankControlScript : MonoBehaviour {
         if (control == true){
             treadRotation += Input.GetAxis("Horizontal") * 3;
 
-            moveSpeed = Input.GetAxis("Vertical") * 600;
+            moveSpeed = Input.GetAxis("Vertical") * 450;
             rB.AddForce(transform.forward * moveSpeed);
 
             if (Input.GetKeyDown(KeyCode.Space)) {
@@ -62,10 +62,12 @@ public class TankControlScript : MonoBehaviour {
         // rB.velocity = transform.forward * 10;
     }
     public void RotateLeft(Rigidbody Body){
-        treadRotation += 3;
+        // treadRotation += 3;
+        rB.AddTorque(transform.up * -10 * Input.GetAxis("Horizontal"));
     }
     public void RotateRight(Rigidbody Body){
-        treadRotation += -3;
+        // treadRotation += -3;
+        rB.AddTorque(transform.up * 10 * Input.GetAxis("Horizontal"));
     }
 
     // public void primraryFire(){   

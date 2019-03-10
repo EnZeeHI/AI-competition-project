@@ -4,15 +4,11 @@ using UnityEngine;
 
 public interface ITank
 {
-    void MoveForward();
-    void MoveBackwards();
-    void RotateLeft();
-    void RotateRight();
-    Vector3 GetRotation();
+    void Move(int speed);
+    void Rotate(int rot);
+    decimal GetRotation();
     Vector2 GetPosition();
     int GetHealth();
     void PrimraryFire();
-
-    
 }
 
