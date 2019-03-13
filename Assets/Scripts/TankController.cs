@@ -26,12 +26,15 @@ public class TankController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // These are temporary debug-controls. in the final build these will not be here.
+        // These are temporary debug-controls. in the final build these will not be here.
+        // You could have used another script for this
+        /*
         Move(Input.GetAxis("Vertical"));
         Rotate(Input.GetAxis("Horizontal") * 2);
         if (Input.GetKeyDown(KeyCode.Space)) {
             Primaryfire();
         }
+        */
 
         rB.AddForce(transform.forward * moveSpeed * 450);
         treadRotation += rotSpeed * 3;
@@ -68,5 +71,23 @@ public class TankController : MonoBehaviour
             GameObject bullet = Instantiate(Projectile, shooty.transform.position, shooty.transform.rotation) as GameObject;
             canFire = false;
         }
+    }
+
+    public RaycastHit CastRayCast(Vector3 direction, int layerMask)
+    { // Call function to check surroundings of tank, give direction and layer 
+
+        // Bit shift the index of the layer (8) to get a bit mask
+        // int layerMask = 1 << 9; // Because we suddenly need to detect more than just the checkpoints
+
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(transform.position, transform.TransformDirection(direction), out hit, Mathf.Infinity, layerMask))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(direction) * hit.distance, Color.yellow);
+            Debug.Log("Did Hit");
+        }
+        return hit;
+
+        // Notice: returns null if nothing hit
     }
 }

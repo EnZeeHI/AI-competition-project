@@ -151,9 +151,10 @@ public class TankControllerUniversal : MonoBehaviour
     // Reloads the scene
     void ResetLevel()
     {
-        GetScore(1,AgentGameObject);
+        // GetScore(1,AgentGameObject);
         SceneManager.LoadScene("SampleScene");
     }
+    /*
     // Gives score to the remaining tank(runs on the destroyed tank script)
     void GetScore(int amount, GameObject ObjectGettingScore)
     {
@@ -167,7 +168,7 @@ public class TankControllerUniversal : MonoBehaviour
         }
         Debug.Log("tank 1 " + GameStats.Tank1Wins);
         Debug.Log("tank 2 " + GameStats.Tank2Wins);
-    }
+    } */
 
     void NextCheckPoint()
     {
