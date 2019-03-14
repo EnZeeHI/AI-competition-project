@@ -11,6 +11,7 @@ public class TankController : MonoBehaviour
     float treadRotation = 0f;
     private bool canFire = false;
     private int fireTimer = 0;
+    private bool stop = true;
 
     public GameObject shooty;
     public GameObject Projectile;
@@ -26,16 +27,6 @@ public class TankController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // These are temporary debug-controls. in the final build these will not be here.
-        // You could have used another script for this
-        /*
-        Move(Input.GetAxis("Vertical"));
-        Rotate(Input.GetAxis("Horizontal") * 2);
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            Primaryfire();
-        }
-        */
-
         rB.AddForce(transform.forward * moveSpeed * 450);
         treadRotation += rotSpeed * 3;
         transform.eulerAngles = new Vector3(0, treadRotation, 0);
@@ -47,6 +38,10 @@ public class TankController : MonoBehaviour
         if (canFire == false){
             fireTimer += 1;
         }
+        if (stop == true){
+            rotSpeed = 0f;
+        }
+        stop = true;
     }
     
     public void Move(float speed)
@@ -57,6 +52,7 @@ public class TankController : MonoBehaviour
     public void Rotate(float rot)
     {
         rotSpeed = Mathf.Clamp(rot, -1.5f, 1.5f);
+        stop = false;
     }
 
     public float GetRotation()
