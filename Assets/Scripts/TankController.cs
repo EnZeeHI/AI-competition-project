@@ -11,7 +11,7 @@ public class TankController : MonoBehaviour
     float treadRotation = 0f;
     private bool canFire = false;
     private int fireTimer = 0;
-    private bool stop = true;
+    // private bool stop = true;
 
     public GameObject shooty;
     public GameObject Projectile;
@@ -38,10 +38,10 @@ public class TankController : MonoBehaviour
         if (canFire == false){
             fireTimer += 1;
         }
-        if (stop == true){
-            rotSpeed = 0f;
-        }
-        stop = true;
+        // if (stop == true){
+        //     rotSpeed = 0f;
+        // }
+        // stop = true;
     }
     
     public void Move(float speed)
@@ -52,7 +52,7 @@ public class TankController : MonoBehaviour
     public void Rotate(float rot)
     {
         rotSpeed = Mathf.Clamp(rot, -1.5f, 1.5f);
-        stop = false;
+        // stop = false;
     }
 
     public float GetRotation()
