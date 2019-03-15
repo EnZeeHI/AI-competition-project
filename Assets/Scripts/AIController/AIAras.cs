@@ -8,6 +8,7 @@ public class AIAras : MonoBehaviour
     public TankController controller;
 
     public int wallLayer = 1 << 10;
+    public int checkpointLayer = 1 <<9;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,21 +24,24 @@ public class AIAras : MonoBehaviour
         RaycastHit farRight = controller.CastRayCast(new Vector3 (1,0,0),wallLayer);
         RaycastHit closeRight = controller.CastRayCast(new Vector3 (0.5f,0,1),wallLayer);
         RaycastHit closeLeft = controller.CastRayCast(new Vector3 (-0.5f,0,1), wallLayer);
+        RaycastHit checkpointForward = controller.CastRayCast(new Vector3(0,0,1), checkpointLayer);
+        RaycastHit checkpointRight = controller.CastRayCast(new Vector3(0.25f,0,1), checkpointLayer);
+        RaycastHit checkpointLeft = controller.CastRayCast(new Vector3(-0.25f,0,1), checkpointLayer);
 
        
-        if (forward.distance <20)
+        if (forward.distance <25)
         {  
             Debug.Log("obstacle");
             if(farRight.distance > farLeft.distance )
             {   
                 controller.Rotate(1.5f);
-                controller.Move(0.25f);
+                controller.Move(0.5f);
                 Debug.Log("turn right");
             }
             else
             {
                 controller.Rotate(-1.5f);
-                controller.Move(0.25f);
+                controller.Move(0.5f);
                 Debug.Log("turn left");
             }
             if (farRight.distance == farLeft.distance && closeLeft.distance < closeRight.distance)
@@ -56,16 +60,21 @@ public class AIAras : MonoBehaviour
             controller.Move(1.25f);
             controller.Rotate(0);
         }
-            if (closeLeft.distance < 3f || farLeft.distance < 1.5f )
-            {
-                controller.Rotate(0.2f);
-                Debug.Log("avoid");
-            }
-            if (closeRight.distance < 3f || farRight.distance < 1.5f)
-            {
-                controller.Rotate(-0.2f);
-                Debug.Log("avoid");
-            }
+        if (closeLeft.distance < 2f || farLeft.distance < 1.5f )
+        {
+            controller.Rotate(0.2f);
+            Debug.Log("avoid");
+        }
+        if (closeRight.distance < 2f || farRight.distance < 1.5f)
+        {
+            controller.Rotate(-0.2f);
+            Debug.Log("avoid");
+        }
         
+        
+
+
+
+
     }
 }
