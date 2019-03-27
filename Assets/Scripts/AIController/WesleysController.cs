@@ -49,6 +49,5 @@ public class WesleysController : MonoBehaviour
             TankController.Rotate(0.5f);
             Debug.Log("Should I go right?");
         }
-        
     }
 }

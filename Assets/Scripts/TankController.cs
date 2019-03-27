@@ -8,9 +8,10 @@ public class TankController : MonoBehaviour
     private Rigidbody rB;
     float moveSpeed = 0f;
     float rotSpeed = 0f;    
-    float treadRotation = 0f;
+    public float treadRotation = 0f;
     private bool canFire = false;
     private int fireTimer = 0;
+    private int hitTimer = 0;
     // private bool stop = true;
 
     public GameObject shooty;
@@ -30,6 +31,11 @@ public class TankController : MonoBehaviour
         rB.AddForce(transform.forward * moveSpeed * 450);
         treadRotation += rotSpeed * 3;
         transform.eulerAngles = new Vector3(0, treadRotation, 0);
+        if(hitTimer > 0){
+            hitTimer -= 1;
+            Rotate(0);
+            Move(0);
+        }
         if (fireTimer > 60)
         {
             canFire = true;
@@ -42,16 +48,21 @@ public class TankController : MonoBehaviour
         //     rotSpeed = 0f;
         // }
         // stop = true;
+        Primaryfire(25);
     }
-    
+
     public void Move(float speed)
     {
-        moveSpeed = Mathf.Clamp(speed, -1.5f, 1.5f);
+        if(hitTimer == 0){
+            moveSpeed = Mathf.Clamp(speed, -1.5f, 1.5f);
+        }
     }
 
     public void Rotate(float rot)
     {
-        rotSpeed = Mathf.Clamp(rot, -1.5f, 1.5f);
+        if(hitTimer == 0){
+            rotSpeed = Mathf.Clamp(rot, -1.5f, 1.5f);
+        }
         // stop = false;
     }
 
@@ -60,13 +71,20 @@ public class TankController : MonoBehaviour
         return transform.eulerAngles.y;
     }
 
-    public void Primaryfire()
+    public void Primaryfire(int speed)
     {
         if (canFire == true)
         {
             GameObject bullet = Instantiate(Projectile, shooty.transform.position, shooty.transform.rotation) as GameObject;
+            if (bullet != null){
+                bullet.GetComponent<Rigidbody>().velocity = transform.forward * speed;
+            }
             canFire = false;
         }
+    }
+
+    public void GetHit(){
+        hitTimer = 10;
     }
 
     public RaycastHit CastRayCast(Vector3 direction, int layerMask)

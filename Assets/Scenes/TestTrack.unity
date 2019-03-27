@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -141,7 +141,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 58356830}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 12.2, y: 0.71, z: 5}
+  m_LocalPosition: {x: 12.2, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 238870379}
@@ -177,8 +177,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.6, y: 1.1, z: 3}
-  m_Center: {x: 0, y: -0.1, z: 0}
+  m_Size: {x: 2.6, y: 1.4, z: 3}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!54 &58356834
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -219,8 +219,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1574583e8f83f458c690b4542c3a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shooty: {fileID: 0}
-  Projectile: {fileID: 0}
+  treadRotation: 0
+  shooty: {fileID: 200419958}
+  Projectile: {fileID: 1545575486887402975, guid: cfe90f5eca3bcfc4dafe0d0ca984f7b8,
+    type: 3}
 --- !u!1 &73234646
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +439,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 176712011}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 12.2, y: 0.71, z: -5}
+  m_LocalPosition: {x: 12.2, y: 0, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 825536973}
@@ -473,8 +475,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.6, y: 1.1, z: 3}
-  m_Center: {x: 0, y: -0.1, z: 0}
+  m_Size: {x: 2.6, y: 1.4, z: 3}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!54 &176712016
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -515,8 +517,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1574583e8f83f458c690b4542c3a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shooty: {fileID: 0}
-  Projectile: {fileID: 0}
+  treadRotation: 0
+  shooty: {fileID: 1938929678}
+  Projectile: {fileID: 1545575486887402975, guid: cfe90f5eca3bcfc4dafe0d0ca984f7b8,
+    type: 3}
 --- !u!1 &200419958
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,7 +990,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 443374639}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 12.2, y: 0.71, z: -15}
+  m_LocalPosition: {x: 12.2, y: 0, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1491514254}
@@ -1022,8 +1026,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.6, y: 1.1, z: 3}
-  m_Center: {x: 0, y: -0.1, z: 0}
+  m_Size: {x: 2.6, y: 1.4, z: 3}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!54 &443374643
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1066,8 +1070,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1574583e8f83f458c690b4542c3a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shooty: {fileID: 0}
-  Projectile: {fileID: 0}
+  treadRotation: 0
+  shooty: {fileID: 1367649347}
+  Projectile: {fileID: 1545575486887402975, guid: cfe90f5eca3bcfc4dafe0d0ca984f7b8,
+    type: 3}
 --- !u!1 &512373895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1218,7 +1224,7 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 1
+  m_TargetDisplay: 2
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
@@ -1411,7 +1417,7 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 1
+  m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
@@ -2601,7 +2607,7 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
+  m_TargetDisplay: 3
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1

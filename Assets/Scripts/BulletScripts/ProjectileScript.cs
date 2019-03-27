@@ -15,7 +15,7 @@ public class ProjectileScript : MonoBehaviour
     void Start()
     {   // assigning 
         Tank = GameObject.FindGameObjectWithTag("Tank");
-        TankScript = Tank.GetComponentInChildren<TankControllerUniversal>();
+        TankScript = Tank.GetComponentInChildren<TankController>();
         AgentCollider = Tank.GetComponentInChildren<BoxCollider>();
     }
     // checks for collision, if the bullet doesnt hit a tank it ricochets once
@@ -23,7 +23,7 @@ public class ProjectileScript : MonoBehaviour
     {   
         if (AgentCollider.gameObject.tag =="Tank")
         {
-            TankScript.GiveDamage(AgentCollider, AttackDamage);
+            TankScript.GetHit();
             Destroy(gameObject);
         }
         else
