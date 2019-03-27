@@ -6,7 +6,7 @@ public class ProjectileScript : MonoBehaviour
 {
     // accesing definitions and variables from TankControllerUniversal Script
     GameObject Tank;
-    private TankControllerUniversal TankScript;
+    private TankController TankScript;
     public int AttackDamage;
     public Collider AgentCollider;
     public int collisionCounter;

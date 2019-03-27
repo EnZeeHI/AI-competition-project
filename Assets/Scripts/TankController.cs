@@ -16,6 +16,7 @@ public class TankController : MonoBehaviour
 
     public GameObject shooty;
     public GameObject Projectile;
+    private ProjectileScript projectileScript;
     
     
     // Start is called before the first frame update
@@ -85,6 +86,7 @@ public class TankController : MonoBehaviour
 
     public void GetHit(){
         hitTimer = 10;
+        transform.GetComponent<Rigidbody>().velocity= (transform.GetComponent<Rigidbody>().velocity / 3) ;
     }
 
     public RaycastHit CastRayCast(Vector3 direction, int layerMask)
