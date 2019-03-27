@@ -9,6 +9,7 @@ public class AIAras : MonoBehaviour
 
     public int wallLayer = 1 << 10;
     public int checkpointLayer = 1 <<9;
+    public float speed;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,12 +37,14 @@ public class AIAras : MonoBehaviour
             {   
                 controller.Rotate(1.5f);
                 controller.Move(0.5f);
+                speed = 0.5f;
                 Debug.Log("turn right");
             }
             else
             {
                 controller.Rotate(-1.5f);
                 controller.Move(0.5f);
+                speed = 0.5f;
                 Debug.Log("turn left");
             }
             if (farRight.distance == farLeft.distance && closeLeft.distance < closeRight.distance)
@@ -58,6 +61,7 @@ public class AIAras : MonoBehaviour
         else
         {
             controller.Move(1.25f);
+            speed = 1.25f;
             controller.Rotate(0);
         }
         if (closeLeft.distance < 2f || farLeft.distance < 1.5f )
