@@ -105,7 +105,7 @@ public class AIMachteld : MonoBehaviour
 
     private void FindFinish()
     {
-        RaycastHit finish = tank.CastRayCast(new Vector3(0, 0, -1), finishLayer);
+        RaycastHit finish = tank.CastRayCast(new Vector3(0, 0, 1), finishLayer);
         if (finish.distance < 5 && finish.distance > 0)
         {
             Debug.Log(finish.distance);
