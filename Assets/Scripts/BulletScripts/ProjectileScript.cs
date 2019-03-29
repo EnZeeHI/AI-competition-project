@@ -10,6 +10,7 @@ public class ProjectileScript : MonoBehaviour
     public int AttackDamage;
     public Collider AgentCollider;
     public int collisionCounter;
+    public GameObject smoke;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class ProjectileScript : MonoBehaviour
         if (AgentCollider.gameObject.tag =="Tank")
         {
             TankScript.GetHit();
+            GameObject splosion = Instantiate(smoke, transform.position, Quaternion.identity) as GameObject;
             Destroy(gameObject);
         }
         else
@@ -31,6 +33,7 @@ public class ProjectileScript : MonoBehaviour
             
             if (collisionCounter >= 1)
             {
+                GameObject splosion = Instantiate(smoke, transform.position, Quaternion.identity) as GameObject;
                 Destroy(gameObject);
             }
             else

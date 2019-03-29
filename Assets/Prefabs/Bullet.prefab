@@ -111,6 +111,7 @@ MonoBehaviour:
   AttackDamage: 20
   AgentCollider: {fileID: 0}
   collisionCounter: 0
+  smoke: {fileID: 5583371392282176888, guid: 145d29fa194ece74b9e484642849175e, type: 3}
 --- !u!135 &1724270328503134413
 SphereCollider:
   m_ObjectHideFlags: 0

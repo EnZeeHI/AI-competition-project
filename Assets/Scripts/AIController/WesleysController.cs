@@ -14,6 +14,8 @@ public class WesleysController : MonoBehaviour
     private Vector3 frontLeft = new Vector3(-10, 0, 7.5f);
     private Vector3 backRight = new Vector3(10, 0, -5);
     private Vector3 backLeft = new Vector3(-10, 0, -5);
+    
+    public Vector3 Tuner;
 
     /*
         Valid Functions:
@@ -24,7 +26,7 @@ public class WesleysController : MonoBehaviour
         
         GetRotation (for some reason)
         
-        PrimaryFire (we still don't know what to do when bullets hit other tanks)
+        PrimaryFire
         
         CastRayCast (vector3 direction, int layermask)
     */
@@ -39,15 +41,24 @@ public class WesleysController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Figure out speed
         TankController.Move(TankController.CastRayCast(front, wall).distance / 27.5f);
 
-        if(TankController.CastRayCast(frontLeft, wall).distance > TankController.CastRayCast(frontRight, wall).distance){
+        // Figure out the rotations.
+        if(TankController.CastRayCast(frontLeft, wall).distance > TankController.CastRayCast(frontRight, wall).distance)
+        {
             TankController.Rotate(-0.5f);
-            Debug.Log("Should I go Left?");
+            // Debug.Log("Should I go Left?");
         }
-        if(TankController.CastRayCast(frontLeft, wall).distance < TankController.CastRayCast(frontRight, wall).distance){
+        if(TankController.CastRayCast(frontLeft, wall).distance < TankController.CastRayCast(frontRight, wall).distance)
+        {
             TankController.Rotate(0.5f);
-            Debug.Log("Should I go right?");
+            // Debug.Log("Should I go right?");
+        }
+
+        //Figure out where to shoot
+        if(TankController.CastRayCast(Tuner, wall).distance > 0){
+            Debug.Log("hey I hit something!");
         }
     }
 }

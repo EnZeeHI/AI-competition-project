@@ -14,15 +14,21 @@ public class TankController : MonoBehaviour
     private int hitTimer = 0;
     // private bool stop = true;
 
+    private AudioSource audioSource;
+
     public GameObject shooty;
     public GameObject Projectile;
+    public CameraShaker shaker;
     private ProjectileScript projectileScript;
+    public AudioClip impact;
+    
     
     
     // Start is called before the first frame update
     void Start()
     {
         rB = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     
@@ -45,10 +51,6 @@ public class TankController : MonoBehaviour
         if (canFire == false){
             fireTimer += 1;
         }
-        // if (stop == true){
-        //     rotSpeed = 0f;
-        // }
-        // stop = true;
         Primaryfire(25);
     }
 
@@ -78,7 +80,7 @@ public class TankController : MonoBehaviour
         {
             GameObject bullet = Instantiate(Projectile, shooty.transform.position, shooty.transform.rotation) as GameObject;
             if (bullet != null){
-                bullet.GetComponent<Rigidbody>().velocity = transform.forward * speed;
+                bullet.GetComponent<Rigidbody>().velocity = transform.forward * Mathf.Clamp(speed, 0, 50);
             }
             canFire = false;
         }
@@ -86,7 +88,9 @@ public class TankController : MonoBehaviour
 
     public void GetHit(){
         hitTimer = 10;
-        transform.GetComponent<Rigidbody>().velocity= (transform.GetComponent<Rigidbody>().velocity / 3) ;
+        transform.GetComponent<Rigidbody>().velocity= (transform.GetComponent<Rigidbody>().velocity / 3);
+        StartCoroutine(shaker.Shake(0.5f, 0.2f));
+        audioSource.PlayOneShot(impact, 1);
     }
 
     public RaycastHit CastRayCast(Vector3 direction, int layerMask)
