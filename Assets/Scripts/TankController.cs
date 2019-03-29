@@ -51,7 +51,6 @@ public class TankController : MonoBehaviour
         if (canFire == false){
             fireTimer += 1;
         }
-        Primaryfire(25);
     }
 
     public void Move(float speed)
